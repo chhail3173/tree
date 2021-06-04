@@ -47,30 +47,7 @@ export class JsonTreeComponent implements OnInit {
 
   dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
 
-  constructor(private httpClient:HttpClient) {
-    // this.jsonData.forEach((element: any) => {
-    //   this.obj = {
-    //     name: element.name,
-       
-    //     children: [
-    //       {
-    //         name: element.name,
-    //         children: element.children
-    //       }
-    //     ]
-    //   }
-    //   TREE_DATA.push(this.obj);
-    //   })
-    // this.dataSource.data = TREE_DATA;
-    // this.dataSource.data = this.firstCase() // if Json file doesn’t have data.
-    // let validate = this.secondCase(TREE_DATA); // if Json file have not valid data
-    // this.dataSource.data = this.thirdCase(); // if json file have single value in an object data
-    // this.dataSource.data = this.fourthCase(); //  if json file have nested data in an object data.
-    //this.dataSource.data = this.fifthCase(); //  if json file have array of object in object data.
-    // console.log(validate);
-    
-
-    
+  constructor(private httpClient:HttpClient) {  
   }
   ngOnInit() {
     this.httpClient.get("assets/new.json").subscribe(data=>{
@@ -89,27 +66,23 @@ export class JsonTreeComponent implements OnInit {
       }
       TREE_DATA.push(this.obj);
       })
-      // this.dataSource.data = TREE_DATA;
-      // this.dataSource.data = TREE_DATA;
-    this.dataSource.data = this.firstCase(TREE_DATA) // if Json file doesn’t have data.
-    // let validate = this.secondCase(TREE_DATA); // if Json file have not valid data
-    // this.dataSource.data = this.thirdCase(); // if json file have single value in an object data
-    // this.dataSource.data = this.fourthCase(); //  if json file have nested data in an object data.
-    //this.dataSource.data = this.fifthCase(); //  if json file have array of object in object data.
-    // console.log(validate);
+      this.dataSource.data = TREE_DATA;
+    // this.dataSource.data = this.firstCase(TREE_DATA) 
+   
 
       
     })
   }
   
-  firstCase(value:any) {
-    if(!value) {
-      console.log('json file is empty');
-      return value;
-    }else {
-      console.log(value);
-    }
-  }
+  // firstCase(value:any) {
+  //   if(!value) {
+  //     console.log('json file is empty');
+      
+  //   }else {
+  //     return value;
+  //     console.log(value);
+  //   }
+  // }
  
   //  firstCase(val:any){
   //    if(val instanceof Array || val instanceof Object) {
@@ -127,14 +100,16 @@ export class JsonTreeComponent implements OnInit {
   //   }
   //  }
 
-  // firstCase(value:any) {
-  //   if(value.hasChild) {
-  //     console.log('json file is nested');
-  //     return value;
-  //   }else {
-  //     console.log(value);
-  //   }
-  // }
+  firstCase(value:any) {
+    for(let v of value){
+      if(v.children) {
+        console.log('json file is nested');
+        return value;
+      }else {
+        console.log('json file is not nested'+value);
+      }
+    }
+  }
  
   
 
