@@ -12,8 +12,7 @@ interface FoodNode {
   children?: FoodNode[];
 }
 
-const TREE_DATA: FoodNode[] = [
-]
+const TREE_DATA: FoodNode[] = [];
 
 interface ExampleFlatNode {
   expandable: boolean;
@@ -52,7 +51,6 @@ export class JsonTreeComponent implements OnInit {
   ngOnInit() {
     this.httpClient.get("assets/new.json").subscribe(data=>{
       this.jsonData = data;
-      console.log(this.jsonData);
        this.jsonData.forEach((element: any) => {
       this.obj = {
         name: element.name,
@@ -67,12 +65,11 @@ export class JsonTreeComponent implements OnInit {
       TREE_DATA.push(this.obj);
       })
       this.dataSource.data = TREE_DATA;
-    // this.dataSource.data = this.firstCase(TREE_DATA) 
-   
-
-      
+    this.dataSource.data = this.firstCase(TREE_DATA)    
     })
   }
+
+  // json is empty or not--------------------------------
   
   // firstCase(value:any) {
   //   if(!value) {
@@ -83,6 +80,8 @@ export class JsonTreeComponent implements OnInit {
   //     console.log(value);
   //   }
   // }
+
+  // json is valid or not-----------------------------------
  
   //  firstCase(val:any){
   //    if(val instanceof Array || val instanceof Object) {
@@ -93,23 +92,29 @@ export class JsonTreeComponent implements OnInit {
   //    }
   // }
 
-  //  firstCase(val:any){
-  //   if(val.length === 1) {
-  //     console.log('json has single object');      
-  //     return val;
-  //   }
-  //  }
+  // json has single value or more------------------
 
-  firstCase(value:any) {
-    for(let v of value){
-      if(v.children) {
-        console.log('json file is nested');
-        return value;
-      }else {
-        console.log('json file is not nested'+value);
-      }
+   firstCase(val:any){
+    if(val.length === 1) {
+      console.log('json has single object');      
+      return val;
+    }else {
+      console.log('json');
     }
-  }
+   }
+
+   // json is valid or not---------------------------
+
+  // firstCase(value:any) {
+  //   for(let v of value){
+  //     if(v.children) {
+  //       console.log('json file is nested');
+  //       return value;
+  //     }else {
+  //       console.log('json file is not nested'+value);
+  //     }
+  //   }
+  // }
  
   
 
