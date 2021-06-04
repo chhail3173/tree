@@ -89,9 +89,9 @@ export class JsonTreeComponent implements OnInit {
       }
       TREE_DATA.push(this.obj);
       })
-      this.dataSource.data = TREE_DATA;
       // this.dataSource.data = TREE_DATA;
-    // this.dataSource.data = this.firstCase() // if Json file doesn’t have data.
+      // this.dataSource.data = TREE_DATA;
+    this.dataSource.data = this.firstCase(TREE_DATA) // if Json file doesn’t have data.
     // let validate = this.secondCase(TREE_DATA); // if Json file have not valid data
     // this.dataSource.data = this.thirdCase(); // if json file have single value in an object data
     // this.dataSource.data = this.fourthCase(); //  if json file have nested data in an object data.
@@ -102,75 +102,39 @@ export class JsonTreeComponent implements OnInit {
     })
   }
   
-
-  
-  firstCase() {
-    return []
-
-
+  firstCase(value:any) {
+    if(!value) {
+      console.log('json file is empty');
+      return value;
+    }else {
+      console.log(value);
+    }
   }
  
-   secondCase = (val:any) => val instanceof Array || val instanceof Object ? true : false;
-   thirdCase() {
-    return [
-      {
-        "name": "Vegetables",  
-        }
-    ]
-  }
+  //  firstCase(val:any){
+  //    if(val instanceof Array || val instanceof Object) {
+  //      console.log("json is valid");
+  //      return val;
+  //    }else {
+  //      console.log("json is not valid");
+  //    }
+  // }
 
-  fourthCase() {
-    return [
-      {
-        "name": "Vegetables",
-        
-        "children": [
-          {
-            "name": "Green",
-            "id": "0003",
-            "children": [
-            { "name": "Broccoli" },
-            { "name": "Brussels sprouts" }
-            ]
-          }
-        ]
-        }
-      
-    ]
+  //  firstCase(val:any){
+  //   if(val.length === 1) {
+  //     console.log('json has single object');      
+  //     return val;
+  //   }
+  //  }
 
-  }
-
-  fifthCase() {
-    return [
-      {
-        "name": "Vegetables",
-        
-        "children": [
-          {
-            "name": "Green",
-            "id": "0003",
-            "children": [
-            { "name": "Broccoli" },
-            { "name": "Brussels sprouts" }
-            ]
-          }
-        ]
-        },
-        {
-          "name": "Fruits",
-          "children": [
-            {
-              "name": "Mango",
-              "id": "0004",
-              "children": [
-              { "name": "Langda" },
-              { "name": "Dashahari" }
-              ]
-            }
-          ]
-        } 
-    ]
-  }
+  // firstCase(value:any) {
+  //   if(value.hasChild) {
+  //     console.log('json file is nested');
+  //     return value;
+  //   }else {
+  //     console.log(value);
+  //   }
+  // }
  
   
 

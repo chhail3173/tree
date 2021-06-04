@@ -18,15 +18,11 @@ export class AppComponent {
   componentRef: any;
   @ViewChild('loadComponent', { read: ViewContainerRef }) entry:any = ViewContainerRef;
   constructor(private resolver: ComponentFactoryResolver) { }
-  createComponent(Id: number) {
+  createComponent() {
     this.entry.clear();
-    if (Id == 1) {
+
       const factory = this.resolver.resolveComponentFactory(AlertComponent);
       this.componentRef = this.entry.createComponent(factory);
-    } else if (Id == 2) {
-      const factory = this.resolver.resolveComponentFactory(AlertComponent);
-      this.componentRef = this.entry.createComponent(factory);
-    } 
     this.componentRef.instance.message = "Called by appComponent";
   }
   destroyComponent() {
@@ -42,8 +38,8 @@ export class AppComponent {
       "Name": "Parent Info"
     }
   ]
-  selectName(id : number) {
-    this.createComponent(id);
+  selectName() {
+    this.createComponent();
   }
  
 }
